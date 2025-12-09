@@ -6,9 +6,9 @@ namespace chess_console
     {
         static void Main(string[] args)
         {
-            Position pos = new Position(3, 4);
+            Board board = new Board(8, 8);
 
-            Console.WriteLine("Position: " + pos);
+            Screen.PrintBoard(board);
 
             Console.ReadLine();
         }
