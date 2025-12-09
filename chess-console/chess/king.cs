@@ -2,9 +2,9 @@
 
 namespace chess_console.chess
 {
-    class king : Piece
+    class King : Piece
     {
-        public king(Board board, Color color) : base(board, color)
+        public King(Board board, Color color) : base(board, color)
         {
 
         }

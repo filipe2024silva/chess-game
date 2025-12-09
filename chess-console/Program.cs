@@ -1,4 +1,5 @@
 ﻿using board;
+using chess;
 using chess_console.chess;
 
 namespace chess_console
@@ -9,15 +10,21 @@ namespace chess_console
         {
             try
             {
-                Board board = new Board(8, 8);
+                ChessGame chessGame = new ChessGame();
 
-                board.placePiece(new Tower(board, Color.Black), new Position(0, 0));
-                board.placePiece(new Tower(board, Color.Black), new Position(1, 3));
-                board.placePiece(new king(board, Color.Black), new Position(2, 4));
+                while (!chessGame.finished)
+                {
+                    Console.Clear();
+                    Screen.PrintBoard(chessGame.board);
 
-                board.placePiece(new Tower(board, Color.White), new Position(3, 5));
+                    Console.WriteLine();
+                    Console.Write("Origin: ");
+                    Position origin = Screen.ChessPositionFromInput().toPosition();
+                    Console.Write("Destiny: ");
+                    Position destiny = Screen.ChessPositionFromInput().toPosition();
 
-                Screen.PrintBoard(board);
+                    chessGame.executeMovement(origin, destiny);
+                }
             }
             catch (BoardException e)
             {

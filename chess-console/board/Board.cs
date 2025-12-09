@@ -32,6 +32,19 @@
             pieces[position.row, position.column] = piece;
             piece.Position = position;
         }
+        public Piece removePiece(Position position)
+        {
+            //validatePosition(position);
+            if (piece(position) == null)
+            {
+                return null;
+            }
+
+            Piece aux = piece(position);
+            aux.Position = null;
+            pieces[position.row, position.column] = null;
+            return aux;
+        }
 
         public bool thereIsAPiece(Position position)
         {
