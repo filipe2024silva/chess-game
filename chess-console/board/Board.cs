@@ -25,6 +25,10 @@
 
         public void placePiece(Piece piece, Position position)
         {
+            if (thereIsAPiece(position))
+            {
+                throw new BoardException("There is already a piece in this position!");
+            }
             pieces[position.line, position.column] = piece;
             piece.Position = position;
         }
