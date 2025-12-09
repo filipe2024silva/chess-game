@@ -11,7 +11,7 @@ namespace chess_console
     {
         public static void PrintBoard(Board board)
         {
-            for (int i = 0; i < board.lines; i++)
+            for (int i = 0; i < board.rows; i++)
             {
                 for (int j = 0; j < board.columns; j++)
                 {

@@ -2,25 +2,25 @@
 {
     class Board
     {
-        public int lines { get; set; }
+        public int rows { get; set; }
         public int columns { get; set; }
         private Piece[,] pieces;
 
-        public Board(int lines, int columns)
+        public Board(int rows, int columns)
         {
-            this.lines = lines;
+            this.rows = rows;
             this.columns = columns;
-            pieces = new Piece[lines, columns];
+            pieces = new Piece[rows, columns];
         }
 
-        public Piece piece(int line, int column)
+        public Piece piece(int row, int column)
         {
-            return pieces[line, column];
+            return pieces[row, column];
         }
 
         public Piece piece(Position position)
         {
-            return pieces[position.line, position.column];
+            return pieces[position.row, position.column];
         }
 
         public void placePiece(Piece piece, Position position)
@@ -29,7 +29,7 @@
             {
                 throw new BoardException("There is already a piece in this position!");
             }
-            pieces[position.line, position.column] = piece;
+            pieces[position.row, position.column] = piece;
             piece.Position = position;
         }
 
@@ -41,7 +41,7 @@
 
         public bool positionValid(Position position)
         {
-            if (position.line < 0 || position.line >= lines || position.column < 0 || position.column >= columns)
+            if (position.row < 0 || position.row >= rows || position.column < 0 || position.column >= columns)
             {
                 return false;
             }
