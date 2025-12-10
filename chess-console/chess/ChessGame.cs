@@ -57,8 +57,15 @@ namespace chess
                 check = false;
             }
 
-            turn++;
-            changePlayer();
+            if (isCheckMate(oponentColor(currentPlayer)))
+            {
+                finished = true;
+            }
+            else
+            {
+                turn++;
+                changePlayer();
+            }
         }
         public void undoMovement(Position origin, Position destiny, Piece capturedPiece)
         {
@@ -168,6 +175,36 @@ namespace chess
                 }
             }
             return false;
+        }
+        public bool isCheckMate(Color color)
+        {
+            if (!isInCheck(color))
+            {
+                return false;
+            }
+            foreach (Piece x in getPiecesOnTheBoard(color))
+            {
+                bool[,] mat = x.possibleMovements();
+                for (int i = 0; i < board.rows; i++)
+                {
+                    for (int j = 0; j < board.columns; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Position origin = x.Position;
+                            Position destiny = new Position(i, j);
+                            Piece _capturedPiece = executeMovement(origin, destiny);
+                            bool checkTest = isInCheck(color);
+                            undoMovement(origin, destiny, _capturedPiece);
+                            if (!checkTest)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
         public void placeNewPiece(char column, int row, Piece piece)
         {

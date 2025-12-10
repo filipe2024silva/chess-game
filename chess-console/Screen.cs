@@ -17,11 +17,19 @@ namespace chess_console
             PrintCapturedPieces(chessGame);
             Console.WriteLine();
             Console.WriteLine("Turn: " + chessGame.turn);
-            Console.WriteLine("Current Player: " + chessGame.currentPlayer);
-            if (chessGame.check)
-            {
-                Console.WriteLine("CHECK!");
+            if (!chessGame.finished){
+                Console.WriteLine("Current Player: " + chessGame.currentPlayer);
+                if (chessGame.check)
+                {
+                    Console.WriteLine("CHECK!");
+                }
             }
+            else
+            {
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine("Winner: " + chessGame.currentPlayer);
+            }
+
             Console.WriteLine();
         }
         public static void PrintBoard(Board board)
