@@ -18,6 +18,11 @@ namespace chess_console
             Console.WriteLine();
             Console.WriteLine("Turn: " + chessGame.turn);
             Console.WriteLine("Current Player: " + chessGame.currentPlayer);
+            if (chessGame.check)
+            {
+                Console.WriteLine("CHECK!");
+            }
+            Console.WriteLine();
         }
         public static void PrintBoard(Board board)
         {

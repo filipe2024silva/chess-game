@@ -33,6 +33,10 @@
         {
             moveCount++;
         }
+        public void decrementMovementCount()
+        {
+            moveCount--;
+        }
         public bool canMoveTo(Position pos)
         {
             return possibleMovements()[pos.row, pos.column];
