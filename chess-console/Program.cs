@@ -14,23 +14,37 @@ namespace chess_console
 
                 while (!chessGame.finished)
                 {
-                    Console.Clear();
-                    Screen.PrintBoard(chessGame.board);
+                    try
+                    {
+                        Console.Clear();
+                        Screen.PrintBoard(chessGame.board);
+                        Console.WriteLine();
+                        Console.WriteLine("Turn: " + chessGame.turn);
+                        Console.WriteLine("Current Player: " + chessGame.currentPlayer);
 
-                    Console.WriteLine();
-                    Console.Write("Origin: ");
-                    Position origin = Screen.ChessPositionFromInput().toPosition();
+                        Console.WriteLine();
+                        Console.Write("Origin: ");
+                        Position origin = Screen.ChessPositionFromInput().toPosition();
+                        chessGame.validateOriginPosition(origin);
 
-                    bool[,] possibleMoves = chessGame.board.piece(origin).possibleMovements();
+                        bool[,] possibleMoves = chessGame.board.piece(origin).possibleMovements();
 
-                    Console.Clear();
-                    Screen.PrintBoard(chessGame.board, possibleMoves);
+                        Console.Clear();
+                        Screen.PrintBoard(chessGame.board, possibleMoves);
 
-                    Console.WriteLine();
-                    Console.Write("Destiny: ");
-                    Position destiny = Screen.ChessPositionFromInput().toPosition();
+                        Console.WriteLine();
+                        Console.Write("Destiny: ");
+                        Position destiny = Screen.ChessPositionFromInput().toPosition();
+                        chessGame.validateDestinyPosition(origin, destiny);
 
-                    chessGame.executeMovement(origin, destiny);
+                        chessGame.makeMovemement(origin, destiny);
+                    }
+                    catch (BoardException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
+                    
                 }
             }
             catch (BoardException e)

@@ -14,12 +14,29 @@
             this.color = color;
             this.moveCount = 0;
         }
-
-        public abstract bool[,] possibleMovements();
-        
+        public bool thereIsPossibleMovements()
+        {
+            bool[,] mat = possibleMovements();
+            for (int i = 0; i < board.rows; i++)
+            {
+                for (int j = 0; j < board.columns; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         public void incrementMovementCount()
         {
             moveCount++;
         }
+        public bool canMoveTo(Position pos)
+        {
+            return possibleMovements()[pos.row, pos.column];
+        }
+        public abstract bool[,] possibleMovements();
     }
 }
