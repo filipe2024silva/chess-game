@@ -10,6 +10,15 @@ namespace chess_console
 {
     class Screen
     {
+        public static void printChessGame(ChessGame chessGame)
+        {
+            PrintBoard(chessGame.board);
+            Console.WriteLine();
+            PrintCapturedPieces(chessGame);
+            Console.WriteLine();
+            Console.WriteLine("Turn: " + chessGame.turn);
+            Console.WriteLine("Current Player: " + chessGame.currentPlayer);
+        }
         public static void PrintBoard(Board board)
         {
             for (int i = 0; i < board.rows; i++)
@@ -23,7 +32,28 @@ namespace chess_console
             }
             Console.WriteLine("  a b c d e f g h");
         }
-
+        public static void PrintCapturedPieces(ChessGame chessGame)
+        {
+            Console.WriteLine("Captured pieces: ");
+            Console.Write("White: ");
+            printSet(chessGame.getCapturedPieces(Color.White));
+            Console.WriteLine();
+            Console.Write("Black: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            printSet(chessGame.getCapturedPieces(Color.Black));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+        }
+        public static void printSet(HashSet<Piece> set)
+        {
+            Console.Write("[");
+            foreach (Piece x in set)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+        }
         public static void PrintBoard(Board board, bool[,] possibleMoves)
         {
             ConsoleColor originColor = Console.BackgroundColor;
@@ -79,9 +109,7 @@ namespace chess_console
                     Console.ForegroundColor = aux;
                 }
                 Console.Write(" ");
-            }
-
-            
+            } 
         }
     }
 }
